@@ -1,5 +1,7 @@
 export default function Home() {
   return (
-      <h1 className="p-4">Namegen.space - Under Construction!</h1>
+      <div className="p-4 flex w-[70rem] m-auto">
+      <h1>Namegen.space - Under Construction!</h1>
+      </div>
   )
 }

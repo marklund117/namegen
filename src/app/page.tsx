@@ -1,6 +1,7 @@
 'use client'
 // primary namegen file - will be experimenting with Mistral
 import { Mistral } from '@mistralai/mistralai'
+import ApiKeyProvider from './apiKeyProvider/page'
 
 // generic function to copy text of a specific button to clipboard
 function copyToClipboard(btnClass: string) {
@@ -10,12 +11,14 @@ function copyToClipboard(btnClass: string) {
   }
 }
 
-export default function Home() {
+interface HomeProps {
+  apiKey: string;
+}
+
+function Home({ apiKey }: HomeProps) {
 
   const generateUsernames = async () => {
     console.log('Generating usernames...')
-    // get our API key fron .env
-    const apiKey = process.env.NEXT_PUBLIC_MISTRAL_API_KEY
 
     // create a Mistral instance
     const client = new Mistral({apiKey: apiKey})
@@ -62,4 +65,12 @@ export default function Home() {
       <div id="usernamebox" className="w-full mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
       </div>
   )
+}
+
+export default function HomeWrapper() {
+  return (
+    <ApiKeyProvider>
+      {({ apiKey }) => <Home apiKey={apiKey} />}
+    </ApiKeyProvider>
+  );
 }

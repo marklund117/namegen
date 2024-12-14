@@ -1,16 +1,17 @@
-// app/apiKeyProvider/page.js - all from mistral large
+// app/apiKeyProvider/page.tsx
 import { headers } from 'next/headers';
 
-import { ReactNode } from 'react';
-
-interface ApiKeyProviderProps {
-  children: (props: { apiKey: string | null }) => ReactNode;
+interface ApiKeyResponse {
+  apiKey: string;
 }
 
-export default async function ApiKeyProvider({ children }: ApiKeyProviderProps) {
+export default async function ApiKeyProvider(): Promise<ApiKeyResponse> {
   const headersList = await headers();
   const apiKey = headersList.get('x-api-key');
 
-  // Pass the API key to the client component via props
-  return children({ apiKey });
+  if (!apiKey) {
+    throw new Error('API key is missing');
+  }
+
+  return { apiKey };
 }

@@ -1,10 +1,13 @@
 // api key thingy
+import { headers } from 'next/headers'
+
 interface ApiKeyResponse {
   apiKey: string;
 }
 
 export default async function ApiKeyProvider(): Promise<ApiKeyResponse> {
-  const apiKey = process.env.MISTRAL_API_KEY
+  const headersList = await headers();
+  const apiKey = headersList.get('x-api-key');
 
   if (!apiKey) {
     throw new Error('API key is missing');

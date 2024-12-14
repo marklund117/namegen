@@ -7,7 +7,7 @@ interface ApiKeyResponse {
 
 export default async function ApiKeyProvider(): Promise<ApiKeyResponse> {
   const headersList = await headers();
-  const apiKey = headersList.get('x-api-key');
+  const apiKey = process.env.MISTRAL_API_KEY
 
   if (!apiKey) {
     throw new Error('API key is missing');

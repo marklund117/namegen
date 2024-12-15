@@ -2,6 +2,7 @@
 // username generator component
 import { Mistral } from '@mistralai/mistralai'
 import { useState } from 'react'
+import Image from 'next/image'
 
 // generic function to copy text of a specific button to clipboard
 function copyToClipboard(btnClass: string) {
@@ -58,8 +59,8 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
       splitArray.forEach((username) => {
         const newName = document.createElement('button')
         // and give each one a class name corresponding to their position in the list
-        newName.className = `username${splitArray.indexOf(username)} shadow-md p-2 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-100`
-        newName.innerHTML = username
+        newName.className = `username${splitArray.indexOf(username)} shadow-md p-2 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-100 flex flex-row justify-around`
+        newName.innerHTML = `${username} <Image src="/copy.png" alt="copy icon" width="16" height="20" />`
         // and add a click handler to each
         newName.onclick = () => copyToClipboard(`username${splitArray.indexOf(username)}`)
         console.log('newName:', newName)
@@ -73,7 +74,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
   }
   return (
     <div className="p-4 flex lg:w-[1024px] w-full m-auto flex-col items-center bg-white">
-      <h1 className="mb-4 text-center">Namegen.space - Under Construction! Click a generated username to copy.</h1>
+      <h1 className="mb-4 text-center">Namegen.space - Under Construction!</h1>
       <button className={` text-xl p-4 w-full bg-emerald-300 rounded-md shadow-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
       {isLoading ? 'Generating...' : 'Generate Usernames'}
       </button>

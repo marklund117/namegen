@@ -7,7 +7,7 @@ import { useState } from 'react'
 function copyToClipboard(btnClass: string) {
   const buttonToCopy = document.getElementsByClassName(btnClass)[0]
   if (buttonToCopy) {
-    navigator.clipboard.writeText(buttonToCopy.innerHTML.split('<')[0])
+    navigator.clipboard.writeText(buttonToCopy.innerHTML.split('<')[0]) // we don't want them to copy the html
     const originalText = buttonToCopy.innerHTML
     const originalClasses = buttonToCopy.className
     buttonToCopy.innerHTML = 'Copied!'
@@ -15,7 +15,7 @@ function copyToClipboard(btnClass: string) {
     setTimeout(() => {
       buttonToCopy.innerHTML = originalText
       buttonToCopy.className = originalClasses
-    }, 1000)  // 1 second
+    }, 1000)  // 1 second delay
   }
 }
 

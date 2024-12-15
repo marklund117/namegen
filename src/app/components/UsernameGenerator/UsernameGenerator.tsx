@@ -74,7 +74,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
   }
   return (
     <div className="p-4 flex lg:w-[1024px] w-full m-auto flex-col items-center bg-white">
-      <h1 className="mb-4 text-center">Namegen.space - Under Construction!</h1>
+      <h1 className="mb-4 text-center">namegen.space - Under Construction!</h1>
       <button className={` text-xl p-4 w-full bg-emerald-300 rounded-md shadow-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
       {isLoading ? 'Generating...' : 'Generate Usernames'}
       </button>

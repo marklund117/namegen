@@ -7,7 +7,7 @@ import { useState } from 'react'
 function copyToClipboard(btnClass: string) {
   const buttonToCopy = document.getElementsByClassName(btnClass)[0]
   if (buttonToCopy) {
-    navigator.clipboard.writeText(buttonToCopy.innerHTML.split(' <')[0])
+    navigator.clipboard.writeText(buttonToCopy.innerHTML.split('<')[0])
     const originalText = buttonToCopy.innerHTML
     const originalClasses = buttonToCopy.className
     buttonToCopy.innerHTML = 'Copied!'

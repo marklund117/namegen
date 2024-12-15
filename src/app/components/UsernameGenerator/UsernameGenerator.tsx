@@ -2,15 +2,14 @@
 // username generator component
 import { Mistral } from '@mistralai/mistralai'
 import { useState } from 'react'
-import Image from 'next/image'
 
 // generic function to copy text of a specific button to clipboard
 function copyToClipboard(btnClass: string) {
   const buttonToCopy = document.getElementsByClassName(btnClass)[0]
   if (buttonToCopy) {
     navigator.clipboard.writeText(buttonToCopy.innerHTML)
-    let originalText = buttonToCopy.innerHTML
-    let originalClasses = buttonToCopy.className
+    const originalText = buttonToCopy.innerHTML
+    const originalClasses = buttonToCopy.className
     buttonToCopy.innerHTML = 'Copied!'
     buttonToCopy.className = `${btnClass} shadow-md p-2 rounded-md w-full bg-emerald-300`
     setTimeout(() => {
@@ -60,7 +59,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
         const newName = document.createElement('button')
         // and give each one a class name corresponding to their position in the list
         newName.className = `username${splitArray.indexOf(username)} shadow-md p-2 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-100 flex flex-row justify-between`
-        newName.innerHTML = `${username} <Image src="/copylarge.png" alt="copy icon" width="16" height="20" />`
+        newName.innerHTML = `${username} <img src="/copylarge.png" alt="copy icon" width="16" height="20" />`
         // and add a click handler to each
         newName.onclick = () => copyToClipboard(`username${splitArray.indexOf(username)}`)
         console.log('newName:', newName)

@@ -7,7 +7,7 @@ import { useState } from 'react'
 function copyToClipboard(btnClass: string) {
   const buttonToCopy = document.getElementsByClassName(btnClass)[0]
   if (buttonToCopy) {
-    navigator.clipboard.writeText(buttonToCopy.innerHTML.split('<')[0]) // we don't want them to copy the html
+    navigator.clipboard.writeText(buttonToCopy.innerHTML.split(' <')[0]) // we don't want them to copy the html
     const originalText = buttonToCopy.innerHTML
     const originalClasses = buttonToCopy.className
     buttonToCopy.innerHTML = 'Copied!'
@@ -58,7 +58,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
       splitArray.forEach((username) => {
         const newName = document.createElement('button')
         // and give each one a class name corresponding to their position in the list
-        newName.className = `username${splitArray.indexOf(username)} shadow-md p-2 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-100 flex flex-row justify-between`
+        newName.className = `username${splitArray.indexOf(username)} shadow-md pt-2 pb-2 pl-4 pr-4 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-100 flex flex-row justify-between`
         newName.innerHTML = `${username} <img src="/copylarge.png" alt="copy icon" width="16" height="20" />`
         // and add a click handler to each
         newName.onclick = () => copyToClipboard(`username${splitArray.indexOf(username)}`)

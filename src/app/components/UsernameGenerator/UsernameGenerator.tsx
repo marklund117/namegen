@@ -78,7 +78,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
       <div className="border-2 border-solid border-emerald-300 rounded-md w-full p-4 shadow-md">
       <form className="flex flex-col items-center">
       <h3 className="mb-4 text-lg text-black">Generate usernames related to...</h3>
-      <input type="text" id="keywordfield" className="w-full p-2 border-2 border-solid border-emerald-300 rounded-md mb-4 text-center" placeholder="enter your desired keyword(s) here"/>
+      <input type="text" id="keywordfield" className="text-black w-full p-2 border-2 border-solid border-emerald-300 rounded-md mb-4 text-center" placeholder="enter your desired keyword(s) here"/>
       </form>
       <button className={` text-xl text-black p-4 w-full bg-emerald-300 rounded-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
       {isLoading ? 'Generating...' : 'Generate Usernames'}

@@ -37,10 +37,11 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
     const client = new Mistral({ apiKey: apiKey })
 
     // get values from the customization panel (later)
+    const givenKeyword = (document.getElementById('keywordfield') as HTMLInputElement)?.value ?? ''
 
     const chatResponse = await client.chat.complete({
       model: 'mistral-large-latest',
-      messages: [{ role: 'user', content: 'list 10 unique internet usernames, separated by commas (comma only, no spaces or newlines). The usernames may optionally contain underscores and uppercase or lowercase letters but no spaces or special characters. No other text should be present in your response.' }]
+      messages: [{ role: 'user', content: `list 10 unique internet usernames related to ${givenKeyword}, separated by commas (comma only, no spaces or newlines). The usernames should be a maximum of 16 characters in length and may optionally contain underscores and uppercase or lowercase letters but no spaces or special characters. No other text should be present in your response.` }]
     })
     if (chatResponse.choices && chatResponse.choices.length > 0) {
       console.log('Chat:', chatResponse.choices[0])
@@ -58,7 +59,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
       splitArray.forEach((username) => {
         const newName = document.createElement('button')
         // and give each one a class name corresponding to their position in the list
-        newName.className = `username${splitArray.indexOf(username)} shadow-md pt-2 pb-2 pl-4 pr-4 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-100 flex flex-row justify-between`
+        newName.className = `username${splitArray.indexOf(username)} shadow-md pt-2 pb-2 pl-4 pr-4 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-50 flex flex-row justify-between`
         newName.innerHTML = `${username} <img src="/copylarge.png" alt="copy icon" width="16" height="20" />`
         // and add a click handler to each
         newName.onclick = () => copyToClipboard(`username${splitArray.indexOf(username)}`)
@@ -74,9 +75,15 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
   return (
     <div className="p-4 flex lg:w-[1024px] w-full m-auto flex-col items-center bg-white">
       <h1 className="mb-4 text-center">namegen.space - Under Construction!</h1>
-      <button className={` text-xl p-4 w-full bg-emerald-300 rounded-md shadow-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
+      <div className="border-2 border-solid border-emerald-300 rounded-md w-full p-4 shadow-md">
+      <form className="flex flex-col items-center">
+      <h3 className="mb-4 text-lg">Generate usernames related to...</h3>
+      <input type="text" id="keywordfield" className="w-full p-2 border-2 border-solid border-emerald-300 rounded-md mb-4 text-center" placeholder="enter your desired keywords here"/>
+      </form>
+      <button className={` text-xl p-4 w-full bg-emerald-300 rounded-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
       {isLoading ? 'Generating...' : 'Generate Usernames'}
       </button>
+      </div>
       <div id="usernamebox" className="w-full mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
     </div>
   )

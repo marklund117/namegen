@@ -59,7 +59,7 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
       splitArray.forEach((username) => {
         const newName = document.createElement('button')
         // and give each one a class name corresponding to their position in the list
-        newName.className = `username${splitArray.indexOf(username)} shadow-md pt-2 pb-2 pl-4 pr-4 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-50 flex flex-row justify-between`
+        newName.className = `username${splitArray.indexOf(username)} text-black shadow-md pt-2 pb-2 pl-4 pr-4 rounded-md w-full bg-white border-2 border-solid border-emerald-300 hover:border-emerald-400 hover:bg-emerald-50 flex flex-row justify-between`
         newName.innerHTML = `${username} <img src="/copylarge.png" alt="copy icon" width="16" height="20" />`
         // and add a click handler to each
         newName.onclick = () => copyToClipboard(`username${splitArray.indexOf(username)}`)
@@ -74,13 +74,13 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
   }
   return (
     <div className="p-4 flex lg:w-[1024px] w-full m-auto flex-col items-center bg-white">
-      <h1 className="mb-4 text-center">namegen.space - Under Construction!</h1>
+      <h1 className="mb-4 text-center text-black">namegen.space - Under Construction!</h1>
       <div className="border-2 border-solid border-emerald-300 rounded-md w-full p-4 shadow-md">
       <form className="flex flex-col items-center">
-      <h3 className="mb-4 text-lg">Generate usernames related to...</h3>
+      <h3 className="mb-4 text-lg text-black">Generate usernames related to...</h3>
       <input type="text" id="keywordfield" className="w-full p-2 border-2 border-solid border-emerald-300 rounded-md mb-4 text-center" placeholder="enter your desired keyword(s) here"/>
       </form>
-      <button className={` text-xl p-4 w-full bg-emerald-300 rounded-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
+      <button className={` text-xl text-black p-4 w-full bg-emerald-300 rounded-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
       {isLoading ? 'Generating...' : 'Generate Usernames'}
       </button>
       </div>

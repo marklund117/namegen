@@ -17,7 +17,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
     <html>
     <body>
     <Header></Header>
-    <div className="min-h-[100vh]">{children}</div>
+    <div className="min-h-[100vh] bg-white">{children}</div>
     <Footer></Footer>
     </body>
     </html>

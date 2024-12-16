@@ -36,12 +36,12 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
     // create a Mistral instance
     const client = new Mistral({ apiKey: apiKey })
 
-    // get values from the customization panel (later)
+    // get values from the customization panel
     const givenKeyword = (document.getElementById('keywordfield') as HTMLInputElement)?.value ?? ''
 
     const chatResponse = await client.chat.complete({
       model: 'mistral-large-latest',
-      messages: [{ role: 'user', content: `list 10 unique internet usernames related to ${givenKeyword}, separated by commas (comma only, no spaces or newlines). The usernames should be a maximum of 16 characters in length and may optionally contain underscores and uppercase or lowercase letters but no spaces or special characters. No other text should be present in your response.` }]
+      messages: [{ role: 'user', content: `list exactly 12 unique internet usernames related to ${givenKeyword}, separated by commas (comma only, no spaces or newlines). The usernames should be a maximum of 16 characters in length and may optionally contain underscores and uppercase or lowercase letters but no spaces or special characters. No other text should be present in your response.` }]
     })
     if (chatResponse.choices && chatResponse.choices.length > 0) {
       console.log('Chat:', chatResponse.choices[0])
@@ -78,13 +78,13 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
       <div className="border-2 border-solid border-emerald-300 rounded-md w-full p-4 shadow-md">
       <form className="flex flex-col items-center">
       <h3 className="mb-4 text-lg">Generate usernames related to...</h3>
-      <input type="text" id="keywordfield" className="w-full p-2 border-2 border-solid border-emerald-300 rounded-md mb-4 text-center" placeholder="enter your desired keywords here"/>
+      <input type="text" id="keywordfield" className="w-full p-2 border-2 border-solid border-emerald-300 rounded-md mb-4 text-center" placeholder="enter your desired keyword(s) here"/>
       </form>
       <button className={` text-xl p-4 w-full bg-emerald-300 rounded-md ${isLoading ? 'bg-neutral-300' : 'bg-emerald-300 hover:bg-emerald-400'}`} onClick={generateUsernames} disabled={isLoading}>
       {isLoading ? 'Generating...' : 'Generate Usernames'}
       </button>
       </div>
-      <div id="usernamebox" className="w-full mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+      <div id="usernamebox" className="w-full mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
     </div>
   )
 }

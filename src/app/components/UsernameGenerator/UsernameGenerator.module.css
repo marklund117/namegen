@@ -1,0 +1,4 @@
+.customfocus:focus {
+    border-color: #6ee7b7;
+    outline: none;
+}

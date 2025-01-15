@@ -76,7 +76,6 @@ export default function UsernameGenerator({ apiKey }: GenProps) {
   }
   return (
     <div className="p-4 flex lg:w-[1024px] w-full m-auto flex-col items-center bg-white">
-      <h1 className="mb-4 text-center text-black">namegen.space - Under Construction!</h1>
       <div className="border-2 border-solid border-neutral-700 rounded-md w-full p-4 shadow-md">
       <form className="flex flex-col items-center">
       <h3 className="mb-4 text-lg text-black">Keyword(s)</h3>
